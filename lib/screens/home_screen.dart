@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(24),
         ),
@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) {
         return Container(
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.all(32),
+          padding: const EdgeInsets.all(32),
           child: ListView(
             children: [
               Text(
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TextFormField(
                 controller: dataController,
                 keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '01/01/2024',
                   labelText: 'Data',
                 ),

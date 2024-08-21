@@ -37,7 +37,7 @@ class _PasswordResetModalState extends State<PasswordResetModal> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancelar'),
+          child: const Text('Cancelar'),
         ),
         TextButton(
           onPressed: () {
