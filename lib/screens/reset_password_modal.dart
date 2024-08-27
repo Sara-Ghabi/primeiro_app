@@ -63,7 +63,7 @@ class _PasswordResetModalState extends State<PasswordResetModal> {
               );
             }
           },
-          child: Text('Recuperar senha'),
+          child: const Text('Recuperar senha'),
         ),
       ],
     );
