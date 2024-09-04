@@ -14,16 +14,13 @@ Future<void> main() async {
   );
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  await _getToken();
-
   runApp(const MyApp());
 }
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('### Handling a background message ${message.messageId}');
+  debugPrint('### Handling a background message ${message.messageId}');
 }
 
 class MyApp extends StatelessWidget {
@@ -49,25 +46,20 @@ class RoteadorTelas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+      stream: FirebaseAuth.instance.userChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          if (snapshot.hasData) {
+            return HomeScreen(user: snapshot.requireData!);
           } else {
-            if (snapshot.hasData) {
-              return HomeScreen(user: snapshot.requireData!);
-            } else {
-              return LoginScreen();
-            }
+            return LoginScreen();
           }
-        });
+        }
+      },
+    );
   }
-}
-
-Future<void> _getToken() async {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  String? token = await messaging.getToken();
-  print("FCM Token: $token"); // Isso será impresso no console de depuração
 }

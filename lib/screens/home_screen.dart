@@ -139,26 +139,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 inputFormatters: [dataMaskFormatter],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: minutosController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '00:00',
                   labelText: 'Horas trabalhadas',
                 ),
                 inputFormatters: [minutosMaskFormatter],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: descricaoController,
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Lembrete do que você fez',
                   labelText: 'Descrição',
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Text(skipButton),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       Hour hour = Hour(
@@ -197,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 180),
+              const SizedBox(height: 180),
             ],
           ),
         );
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 void setupFCM() async {
   final fcmToken = await FirebaseMessaging.instance.getToken();
-  print(fcmToken);
+  debugPrint(fcmToken);
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -240,19 +240,19 @@ void setupFCM() async {
   );
 
   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('User granted permission');
+    debugPrint('User granted permission');
   } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-    print('User granted provisional permission');
+    debugPrint('User granted provisional permission');
   } else {
-    print('User declined or has not accepted permission');
+    debugPrint('User declined or has not accepted permission');
   }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('### já funciona Message data: ${message.data}');
+    debugPrint('Got a message whilst in the foreground!');
+    debugPrint('### já funciona Message data: ${message.data}');
 
     if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
+      debugPrint('Message also contained a notification: ${message.notification}');
     }
   });
 }
